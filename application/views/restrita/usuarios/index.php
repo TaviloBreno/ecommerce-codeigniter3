@@ -23,7 +23,7 @@
 												<th>E-mail</th>
 												<th>Usuário</th>
 												<th>Status</th>
-												<th>Ações</th>
+												<th class="nosort">Ações</th>
 											</tr>
 											</thead>
 											<tbody>

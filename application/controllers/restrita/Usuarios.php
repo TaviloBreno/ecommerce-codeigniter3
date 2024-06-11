@@ -29,4 +29,32 @@ class Usuarios extends CI_Controller
 		$this->load->view('restrita/usuarios/index');
 		$this->load->view('restrita/layout/footer');
 	}
+
+	public function core($usuarioId = null)
+	{
+		if (!$usuarioId) {
+			// Cadastrando
+			$data = [
+				'titulo' => 'Cadastrar usuário',
+			];
+
+			$this->load->view('restrita/layout/header', $data);
+			$this->load->view('restrita/usuarios/core');
+			$this->load->view('restrita/layout/footer');
+		} else {
+			if (!$usuario = $this->ion_auth->user($usuarioId)->row()) {
+				$this->session->set_flashdata('erro', 'Usuário não encontrado');
+				redirect('restrita/usuarios');
+			} else {
+				$data = [
+					'titulo' => 'Atualizar usuário',
+					'usuario' => $usuario,
+				];
+
+				$this->load->view('restrita/layout/header', $data);
+				$this->load->view('restrita/usuarios/core');
+				$this->load->view('restrita/layout/footer');
+			}
+		}
+	}
 }
