@@ -8,12 +8,12 @@
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 	<title>Otika - Admin Dashboard Template</title>
 	<!-- General CSS Files -->
-	<link rel="stylesheet" href="assets/css/app.min.css">
+	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>assets/css/app.min.css">
 	<!-- Template CSS -->
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/components.css">
+	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>assets/css/style.css">
+	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>assets/css/components.css">
 	<!-- Custom style CSS -->
-	<link rel="stylesheet" href="assets/css/custom.css">
+	<link rel="stylesheet" href="<?php echo base_url('public/'); ?>assets/css/custom.css">
 	<link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
 </head>
 
@@ -56,27 +56,27 @@
 						</div>
 						<div class="dropdown-list-content dropdown-list-message">
 							<a href="#" class="dropdown-item"> <span class="dropdown-item-avatar
-											text-white"> <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle">
+											text-white"> <img alt="image" src="<?php echo base_url('public/'); ?>assets/img/users/user-1.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">John
                       Deo</span>
                     <span class="time messege-text">Please check your mail !!</span>
                     <span class="time">2 Min Ago</span>
                   </span>
 							</a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-2.png" class="rounded-circle">
+                    <img alt="image" src="<?php echo base_url('public/'); ?>assets/img/users/user-2.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">Sarah
                       Smith</span> <span class="time messege-text">Request for leave
                       application</span>
                     <span class="time">5 Min Ago</span>
                   </span>
 							</a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-5.png" class="rounded-circle">
+                    <img alt="image" src="<?php echo base_url('public/'); ?>assets/img/users/user-5.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">Jacob
                       Ryan</span> <span class="time messege-text">Your payment invoice is
                       generated.</span> <span class="time">12 Min Ago</span>
                   </span>
 							</a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-4.png" class="rounded-circle">
+                    <img alt="image" src="<?php echo base_url('public/'); ?>assets/img/users/user-4.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">Lina
                       Smith</span> <span class="time messege-text">hii John, I have upload
                       doc
@@ -84,7 +84,7 @@
                       Min Ago</span>
                   </span>
 							</a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-3.png" class="rounded-circle">
+                    <img alt="image" src="<?php echo base_url('public/'); ?>assets/img/users/user-3.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">Jalpa
                       Joshi</span> <span class="time messege-text">Please do as specify.
                       Let me
@@ -92,7 +92,7 @@
                       Days Ago</span>
                   </span>
 							</a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="assets/img/users/user-2.png" class="rounded-circle">
+                    <img alt="image" src="<?php echo base_url('public/'); ?>assets/img/users/user-2.png" class="rounded-circle">
                   </span> <span class="dropdown-item-desc"> <span class="message-user">Sarah
                       Smith</span> <span class="time messege-text">Client Requirements</span>
                     <span class="time">2 Days Ago</span>
@@ -154,7 +154,7 @@
 					</div>
 				</li>
 				<li class="dropdown"><a href="#" data-toggle="dropdown"
-										class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="assets/img/user.png"
+										class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="<?php echo base_url('public/'); ?>assets/img/user.png"
 																										 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
 					<div class="dropdown-menu dropdown-menu-right pullDown">
 						<div class="dropdown-title">Hello Sarah Smith</div>
@@ -176,7 +176,7 @@
 		<div class="main-sidebar sidebar-style-2">
 			<aside id="sidebar-wrapper">
 				<div class="sidebar-brand">
-					<a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
+					<a href="index.html"> <img alt="image" src="<?php echo base_url('public/'); ?>assets/img/logo.png" class="header-logo" /> <span
 							class="logo-name">Otika</span>
 					</a>
 				</div>
@@ -492,13 +492,13 @@
 	</div>
 </div>
 <!-- General JS Scripts -->
-<script src="assets/js/app.min.js"></script>
+<script src="<?php echo base_url('public/'); ?>assets/js/app.min.js"></script>
 <!-- JS Libraies -->
 <!-- Page Specific JS File -->
 <!-- Template JS File -->
-<script src="assets/js/scripts.js"></script>
+<script src="<?php echo base_url('public/'); ?>assets/js/scripts.js"></script>
 <!-- Custom JS File -->
-<script src="assets/js/custom.js"></script>
+<script src="<?php echo base_url('public/'); ?>assets/js/custom.js"></script>
 </body>
 
 
