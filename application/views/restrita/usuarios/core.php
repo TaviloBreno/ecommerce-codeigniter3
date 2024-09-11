@@ -45,7 +45,7 @@ $this->load->view('restrita/layout/sidebar');
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label>E-mail</label>
-									<input type="text" class="form-control" name="email" value="<?php echo isset($usuario->email) ? $usuario->email : set_value('email'); ?>">
+									<input type="email" class="form-control" name="email" value="<?php echo isset($usuario->email) ? $usuario->email : set_value('email'); ?>">
 									<?php echo form_error('email', '<div class="text-danger">', '</div>'); ?>
 								</div>
 								<div class="form-group col-md-6">

@@ -32,6 +32,8 @@ class Usuarios extends CI_Controller
 
 	public function core($ususario_id = null)
 	{
+		$ususario_id = (int) $ususario_id;
+
 		if(!$ususario_id){
 			// Cadastrando
 			$this->form_validation->set_rules('first_name', 'Nome', 'trim|required');
@@ -39,25 +41,34 @@ class Usuarios extends CI_Controller
 			$this->form_validation->set_rules('email', 'E-mail', 'trim|required|valid_email|is_unique[users.email]');
 			$this->form_validation->set_rules('username', 'Usuário', 'trim|required|is_unique[users.username]');
 			$this->form_validation->set_rules('password', 'Senha', 'required|min_length[6]');
-			$this->form_validation->set_rules('confirmacao', 'Confirmação de senha', 'required|matches[password]');
+			$this->form_validation->set_rules('password_confirm', 'Confirmação de senha', 'required|matches[password]');
+
 
 			if($this->form_validation->run()){
-				$data = array(
+				$username = $this->security->xss_clean($this->input->post('username'));
+				$password = $this->security->xss_clean($this->input->post('password'));
+				$email = $this->security->xss_clean($this->input->post('email'));
+
+				$additional_data = $this->security->xss_clean(array(
 					'first_name' => $this->input->post('first_name'),
 					'last_name' => $this->input->post('last_name'),
-					'email' => $this->input->post('email'),
-					'username' => $this->input->post('username'),
-					'password' => $this->input->post('password'),
-					'ativo' => $this->input->post('ativo'),
-				);
+					'active' => $this->input->post('ativo'),
+				));
+				$group = $this->security->xss_clean(array($this->input->post('perfil')));
 
-				$data['password'] = $this->ion_auth->hash_password($data['password']);
-				$data = $this->security->xss_clean($data);
+				$password = $this->ion_auth->hash_password($password);
 
-				$this->ion_auth->register($data);
+				if($this->ion_auth->register($username, $password, $email, $additional_data, $group)) {
+					$this->session->set_flashdata('sucesso', 'Usuário cadastrado com sucesso');
+				}else{
+					$this->session->set_flashdata('erro', $this->ion_auth->errors());
+				}
+
+				redirect('restrita/usuarios');
 			} else {
 				$data = array(
 					'titulo' => 'Cadastrar usuário',
+					'grupos' => $this->ion_auth->groups()->result(),
 				);
 
 				$this->load->view('restrita/layout/header', $data);
@@ -105,7 +116,7 @@ class Usuarios extends CI_Controller
 
 						$this->session->set_flashdata('sucesso', 'Usuário atualizado com sucesso');
 					}else{
-						$this->session->set_flashdata('erro', 'Erro ao atualizar usuário');
+						$this->session->set_flashdata('erro', $this->ion_auth->errors());
 					}
 
 					redirect('restrita/usuarios');

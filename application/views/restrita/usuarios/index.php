@@ -9,8 +9,9 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div class="card-header">
+						<div class="card-header d-block">
 							<h4><?php echo $titulo; ?></h4>
+							<a href="<?php echo base_url('restrita/usuarios/core'); ?>" class="btn btn-primary float-right">Cadastrar</a>
 						</div>
 						<div class="card-body">
 
@@ -84,59 +85,46 @@
 							<?php endif; ?>
 
 							<div class="table-responsive">
-								<table class="table table-striped data-table"
-								">
-								<thead>
-								<tr>
-									<th class="text-center">
-										#
-									</th>
-									<th>Nome completo</th>
-									<th>E-mail</th>
-									<th>Usuário</th>
-									<th>Perfil de Acesso</th>
-									<th>Status</th>
-									<th class="nosort">Ações</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
+								<table class="table table-striped data-table">
+									<thead>
+									<tr>
+										<th class="text-center">#</th>
+										<th>Nome completo</th>
+										<th>E-mail</th>
+										<th>Usuário</th>
+										<th>Perfil de Acesso</th>
+										<th>Status</th>
+										<th class="nosort">Ações</th>
+									</tr>
+									</thead>
+									<tbody>
 									<?php if (isset($usuarios)): ?>
 										<?php foreach ($usuarios as $usuario): ?>
-											<td>
-												<?php echo $usuario->id; ?>
-											</td>
-											<td><?php echo $usuario->first_name . ' ' . $usuario->last_name; ?></td>
-											<td>
-												<?php echo $usuario->email; ?>
-											</td>
-											<td><?php echo $usuario->username; ?></td>
-											<td><?php echo ($this->ion_auth->is_admin($usuario->id) ? 'Administrador' : 'Cliente'); ?></td>
-											<td>
-												<?php echo($usuario->active == 1 ? '<div class="badge badge-success">Ativo</div>' : '<div class="badge badge-danger">Inativo</div>'); ?>
-											</td>
-											<td>
-												<a href="<?php echo base_url('restrita/usuarios/core/' . $usuario->id); ?>"
-												   class="btn btn-primary btn-sm" data-toggle="tooltip"
-												   title="Editar usuário">
-													<i class="fas fa-edit"></i>
-												</a>
-												<a href="<?php echo base_url('restrita/usuarios/excluir/' . $usuario->id); ?>"
-												   class="btn btn-danger btn-sm"
-												   onclick="return confirm('Tem certeza que deseja excluir este usuário?');"
-												   data-toggle="tooltip" title="Excluir usuário">
-													<i class="fas fa-trash-alt"></i>
-												</a>
-											</td>
+											<tr> <!-- Aqui começa a linha de cada usuário -->
+												<td><?php echo $usuario->id; ?></td>
+												<td><?php echo $usuario->first_name . ' ' . $usuario->last_name; ?></td>
+												<td><?php echo $usuario->email; ?></td>
+												<td><?php echo $usuario->username; ?></td>
+												<td><?php echo ($this->ion_auth->is_admin($usuario->id) ? 'Administrador' : 'Cliente'); ?></td>
+												<td><?php echo($usuario->active == 1 ? '<div class="badge badge-success">Ativo</div>' : '<div class="badge badge-danger">Inativo</div>'); ?></td>
+												<td>
+													<a href="<?php echo base_url('restrita/usuarios/core/' . $usuario->id); ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar usuário">
+														<i class="fas fa-edit"></i>
+													</a>
+													<a href="<?php echo base_url('restrita/usuarios/excluir/' . $usuario->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este usuário?');" data-toggle="tooltip" title="Excluir usuário">
+														<i class="fas fa-trash-alt"></i>
+													</a>
+												</td>
+											</tr> <!-- Aqui termina a linha de cada usuário -->
 										<?php endforeach; ?>
 									<?php else: ?>
-								<tr>
-									<td colspan="5" class="text-center">Nenhum usuário encontrado</td>
-								</tr>
-								<?php endif; ?>
-								</tr>
-								</tbody>
+										<tr>
+											<td colspan="7" class="text-center">Nenhum usuário encontrado</td>
+										</tr>
+									<?php endif; ?>
+									</tbody>
 								</table>
+
 							</div>
 						</div>
 					</div>
