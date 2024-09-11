@@ -22,6 +22,18 @@
 	<?php endforeach; ?>
 <?php endif; ?>
 
+<script>
+	$('.delete').on('click', function (event){
+		event.preventDefault();
+
+		var choice = confirm($(this).attr('data-confirm'));
+
+		if(choice){
+			window.location.href = $(this).attr('href');
+		}
+	});
+</script>
+
 </body>
 
 

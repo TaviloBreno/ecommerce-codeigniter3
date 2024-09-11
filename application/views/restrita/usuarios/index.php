@@ -111,7 +111,7 @@
 													<a href="<?php echo base_url('restrita/usuarios/core/' . $usuario->id); ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar usuário">
 														<i class="fas fa-edit"></i>
 													</a>
-													<a href="<?php echo base_url('restrita/usuarios/excluir/' . $usuario->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este usuário?');" data-toggle="tooltip" title="Excluir usuário">
+													<a href="<?php echo base_url('restrita/usuarios/delete/' . $usuario->id); ?>" class="btn btn-danger btn-sm delete" data-confirm="Tem certeza da exclusão do(a) <?php echo $usuario->first_name.' '.$usuario->last_name;?>?" data-toggle="tooltip" title="Excluir usuário">
 														<i class="fas fa-trash-alt"></i>
 													</a>
 												</td>

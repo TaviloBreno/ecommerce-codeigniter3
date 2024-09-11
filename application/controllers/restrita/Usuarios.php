@@ -136,6 +136,29 @@ class Usuarios extends CI_Controller
 		}
 	}
 
+	public function delete($usario_id = null)
+	{
+		$usario_id = (int) $usario_id;
+
+		if(!$usario_id || !$this->ion_auth->user($usario_id)->row()){
+			$this->session->set_flashdata('erro', 'Usuário não encontrado');
+			redirect('restrita/usuarios');
+		}
+
+		if($this->ion_auth->is_admin($usario_id)){
+			$this->session->set_flashdata('erro', 'Administradores não podem ser excluídos');
+			redirect('restrita/usuarios');
+		}
+
+		if($this->ion_auth->delete_user($usario_id)){
+			$this->session->set_flashdata('sucesso', 'Usuário excluído com sucesso');
+		}else{
+			$this->session->set_flashdata('erro', $this->ion_auth->errors());
+		}
+
+		redirect('restrita/usuarios');
+	}
+
 	public function valida_email($email)
 	{
 		$usuario_id = $this->input->post('usuario_id');
