@@ -91,6 +91,7 @@
 										<th>#</th>
 										<th>Nome da Marca</th>
 										<th>Meta Link da Marca</th>
+										<th>Data de criação</th>
 										<th>Ativa</th>
 										<th class="nosort">Ações</th>
 									</tr>
@@ -98,10 +99,11 @@
 									<tbody>
 									<?php if (isset($marcas)): ?>
 										<?php foreach ($marcas as $marca): ?>
-											<tr> <!-- Aqui começa a linha de cada usuário -->
+											<tr>
 												<td><?php echo $marca->marca_id; ?></td>
-												<td><?php echo $marca->marca_nome; ?>a</td>
+												<td><?php echo $marca->marca_nome; ?></td>
 												<td><i data-feather="link-2"></i>&nbsp;<?php echo $marca->marca_meta_link; ?></td>
+												<td><?php echo formata_data_banco_com_hora($marca->marca_data_criacao);?></td>
 												<td><?php echo ($marca->marca_ativa == 1 ? '<div class="badge badge-success">Sim</div>' : '<div class="badge badge-danger">Não</div>'); ?></td>
 												<td>
 													<a href="<?php echo base_url('restrita/marcas/core/' . $marca->marca_id); ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar Marca <?php echo $marca->marca_nome; ?>">
