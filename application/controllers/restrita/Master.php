@@ -70,6 +70,9 @@ class Master extends CI_Controller
 			}else{
 				$this->form_validation->set_rules('categoria_pai_nome', 'Nome da categoria', 'trim|required|min_length[4]|max_length[45]|callback_valida_nome_categoria');
 				if($this->form_validation->run()){
+
+					if($this->input->post('categoria_pai_ativa') == 0)
+
 					$data = elements(
 						array(
 							'categoria_pai_nome',
@@ -86,13 +89,6 @@ class Master extends CI_Controller
 				}else{
 					$data = array(
 						'titulo' => 'Editar categoria pai',
-						'styles' => array(
-							'bundles/select2/dist/css/select2.min.css',
-						),
-						'scripts' => array(
-							'bundles/select2/dist/js/select2.full.min.js',
-							'js/page/forms-advanced-forms.js',
-						),
 						'categoria_pai' => $categoria_pai,
 					);
 					$this->load->view('restrita/layout/header', $data);

@@ -21,40 +21,40 @@ $this->load->view('restrita/layout/sidebar');
 							'name' => 'form_core',
 						);
 
-						if (isset($categoria_pai)) {
-							$categoria_pai_id = $categoria_pai->categoria_pai_id;
+						if (isset($categoria)) {
+							$categoria_id = $categoria->categoria_id;
 						} else {
-							$categoria_pai_id = '';
+							$categoria_id = '';
 						} ?>
 
-						<?php echo form_open('restrita/master/core/' . $categoria_pai_id, $atributos); ?>
+						<?php echo form_open('restrita/categorias/core/' . $categoria_id, $atributos); ?>
 
 						<div class="card-body">
 							<div class="form-row">
-								<div class="form-group <?php echo(isset($categoria_pai) ? "col-md-4" : "col-md-6"); ?>">
+								<div class="form-group <?php echo(isset($categoria) ? "col-md-4" : "col-md-6"); ?>">
 									<label>Nome da Categoria</label>
-									<input type="text" class="form-control" name="categoria_pai_nome"
-										   value="<?php echo isset($categoria_pai) ? $categoria_pai->categoria_pai_nome : set_value('categoria_pai_nome'); ?>">
-									<?php echo form_error('categoria_pai_nome', '<div class="text-danger">', '</div>'); ?>
+									<input type="text" class="form-control" name="categoria_nome"
+										   value="<?php echo isset($categoria) ? $categoria->categoria_nome : set_value('categoria_nome'); ?>">
+									<?php echo form_error('categoria_nome', '<div class="text-danger">', '</div>'); ?>
 								</div>
-								<?php if (isset($categoria_pai)): ?>
+								<?php if (isset($categoria)): ?>
 									<div class="form-group col-md-4">
 										<label>Meta Link da Categoria</label>
-										<input type="text" class="form-control" readonly name="categoria_pai_meta_link"
-											   value="<?php echo $categoria_pai->categoria_pai_meta_link; ?>">
-										<?php echo form_error('categoria_pai_meta_link', '<div class="text-danger">', '</div>'); ?>
+										<input type="text" class="form-control" readonly name="categoria_meta_link"
+											   value="<?php echo $categoria->categoria_meta_link; ?>">
+										<?php echo form_error('categoria_meta_link', '<div class="text-danger">', '</div>'); ?>
 									</div>
 								<?php endif; ?>
-								<div class="form-group <?php echo(isset($categoria_pai) ? "col-md-4" : "col-md-6"); ?>">
+								<div class="form-group <?php echo(isset($categoria) ? "col-md-4" : "col-md-6"); ?>">
 									<label>Ativa</label>
-									<select class="form-control" name="categoria_pai_ativa">
-										<?php if (isset($categoria_pai)): ?>
+									<select class="form-control" name="categoria_ativa">
+										<?php if (isset($categoria)): ?>
 											<option
-												value="1" <?php echo($categoria_pai->categoria_pai_ativa == 1 ? 'selected' : ''); ?>>
+												value="1" <?php echo($categoria->categoria_ativa == 1 ? 'selected' : ''); ?>>
 												Sim
 											</option>
 											<option
-												value="0" <?php echo($categoria_pai->categoria_pai_ativa == 0 ? 'selected' : ''); ?>>
+												value="0" <?php echo($categoria->categoria_ativa == 0 ? 'selected' : ''); ?>>
 												Não
 											</option>
 										<?php else: ?>
@@ -65,15 +65,15 @@ $this->load->view('restrita/layout/sidebar');
 								</div>
 							</div>
 
-							<?php if (isset($categoria_pai)): ?>
+							<?php if (isset($categoria)): ?>
 
-								<input type="hidden" name="categoria_pai_id"
-									   value="<?php echo $categoria_pai->categoria_pai_id; ?>">
+								<input type="hidden" name="categoria_id"
+									   value="<?php echo $categoria->categoria_id; ?>">
 
 							<?php endif; ?>
 
 							<button class="btn btn-primary mr-2">Salvar</button>
-							<a href="<?php echo base_url('restrita/master'); ?>" class="btn btn-dark">Voltar</a>
+							<a href="<?php echo base_url('restrita/categorias'); ?>" class="btn btn-dark">Voltar</a>
 
 							<?php echo form_close(); ?>
 						</div>
