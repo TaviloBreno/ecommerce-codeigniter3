@@ -130,6 +130,12 @@ class Master extends CI_Controller
 			$this->session->set_flashdata('erro', 'Categoria pai não encontrada');
 			redirect('restrita/master');
 		}
+
+		if($this->core_model->get_by_id('categorias', array('categoria_pai_id' => $categoria_pai_id))){
+			$this->session->set_flashdata('erro', 'Essa categoria pai não pode ser excluída, pois está sendo utilizada em categorias cadastradas');
+			redirect('restrita/master');
+		}
+
 		$this->core_model->delete('categorias_pai', array('categoria_pai_id' => $categoria_pai_id));
 		redirect('restrita/master');
 	}

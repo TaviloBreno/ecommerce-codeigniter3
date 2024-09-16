@@ -25,6 +25,9 @@
 				<ul class="dropdown-menu">
 					<li><a class="nav-link" href="<?php echo base_url('restrita/master'); ?>">Categorias pai</a></li>
 				</ul>
+				<ul class="dropdown-menu">
+					<li><a class="nav-link" href="<?php echo base_url('restrita/categorias'); ?>">Categorias filhas</a></li>
+				</ul>
 			</li>
 
 			<li class="dropdown">
