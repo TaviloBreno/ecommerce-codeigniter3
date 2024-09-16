@@ -30,6 +30,10 @@
 				</ul>
 			</li>
 
+			<li class="dropdown <?php echo $this->router->fetch_class() == 'produtos' && $this->router->fetch_method() == 'index' ? 'active' : ''; ?>">
+				<a href="<?php echo base_url('restrita/produtos'); ?>" class="nav-link"><i data-feather="archive"></i><span>Produtos</span></a>
+			</li>
+
 			<li class="dropdown">
 				<a href="#" class="menu-toggle nav-link has-dropdown"><i
 						data-feather="settings"></i><span>Configurações</span></a>
