@@ -125,4 +125,22 @@ class Categorias extends CI_Controller
 			}
 		}
 	}
+
+	public function delete($categoria_id = null)
+	{
+		$categoria_id = (int) $categoria_id;
+
+		if(!$categoria_id || !$this->core_model->get_by_id('categorias', array('categoria_id' => $categoria_id))){
+			$this->session->set_flashdata('erro', 'Categoria não encontrada');
+			redirect('restrita/categorias');
+		}
+
+		if($this->core_model->get_by_id('produtos', array('produto_categoria_id' => $categoria_id))){
+			$this->session->set_flashdata('erro', 'Essa categoria não pode ser excluída, pois está sendo utilizada em produtos cadastrados');
+			redirect('restrita/categorias');
+		}
+
+		$this->core_model->delete('categorias', array('categoria_id' => $categoria_id));
+		redirect('restrita/categorias');
+	}
 }
