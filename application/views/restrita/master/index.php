@@ -89,8 +89,8 @@
 									<thead>
 									<tr>
 										<th>#</th>
-										<th>Nome da Marca</th>
-										<th>Meta Link da Marca</th>
+										<th>Nome da Categoria</th>
+										<th>Meta Link da Categoria</th>
 										<th>Data de criação</th>
 										<th>Ativa</th>
 										<th class="nosort">Ações</th>

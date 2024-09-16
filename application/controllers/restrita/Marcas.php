@@ -67,7 +67,6 @@ class Marcas extends CI_Controller
 				$this->load->view('restrita/marcas/core');
 				$this->load->view('restrita/layout/footer');
 			}
-
 		}else{
 			if(!$marca = $this->core_model->get_by_id('marcas', array('marca_id' => $marca_id))){
 				$this->session->set_flashdata('erro', 'Marca não encontrada');
