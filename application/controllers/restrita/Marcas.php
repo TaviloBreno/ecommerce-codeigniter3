@@ -38,6 +38,35 @@ class Marcas extends CI_Controller
 	public function core($marca_id = null)
 	{
 		if(!$marca_id){
+			// Cadastrando
+			$this->form_validation->set_rules('marca_nome', 'Nome da marca', 'trim|required|min_length[2]|max_length[45]|callback_valida_nome_marca');
+
+			if($this->form_validation->run()){
+
+				$data = elements(
+					array(
+						'marca_nome',
+						'marca_meta_link',
+						'marca_ativa',
+					), $this->input->post()
+				);
+
+				$data['marca_meta_link'] = url_amigavel($data['marca_nome']);
+
+				$data = html_escape($data);
+
+				$this->core_model->insert('marcas', $data);
+				redirect('restrita/marcas');
+
+			}else{
+				$data = array(
+					'titulo' => 'Cadastrar marca',
+				);
+
+				$this->load->view('restrita/layout/header', $data);
+				$this->load->view('restrita/marcas/core');
+				$this->load->view('restrita/layout/footer');
+			}
 
 		}else{
 			if(!$marca = $this->core_model->get_by_id('marcas', array('marca_id' => $marca_id))){
@@ -82,7 +111,6 @@ class Marcas extends CI_Controller
 		$marca_id = $this->input->post('marca_id');
 
 		if(!$marca_id){
-			// Cadastrando
 			if($this->core_model->get_by_id('marcas', array('marca_nome' => $marca_nome))){
 				$this->form_validation->set_message('valida_nome_marca', 'Essa marca já existe');
 				return false;
@@ -90,7 +118,6 @@ class Marcas extends CI_Controller
 				return true;
 			}
 		}else{
-			// Editando
 			if($this->core_model->get_by_id('marcas', array('marca_nome' => $marca_nome, 'marca_id !=' => $marca_id))){
 				$this->form_validation->set_message('valida_nome_marca', 'Essa marca já existe');
 				return false;
@@ -98,5 +125,23 @@ class Marcas extends CI_Controller
 				return true;
 			}
 		}
+	}
+
+	public function delete($marca_id = null)
+	{
+		$marca_id = (int) $marca_id;
+
+		if(!$marca_id || !$this->core_model->get_by_id('marcas', array('marca_id' => $marca_id))){
+			$this->session->set_flashdata('erro', 'Marca não encontrada');
+			redirect('restrita/marcas');
+		}
+
+		if($this->core_model->get_by_id('produtos', array('produto_marca_id' => $marca_id))){
+			$this->session->set_flashdata('erro', 'Essa marca não pode ser excluída, pois está sendo utilizada em produtos');
+			redirect('restrita/marcas');
+		}
+
+		$this->core_model->delete('marcas', array('marca_id' => $marca_id));
+		redirect('restrita/marcas');
 	}
 }
