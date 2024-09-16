@@ -40,7 +40,33 @@ class Categorias extends CI_Controller
 		$categoria_id = (int) $categoria_id;
 
 		if(!$categoria_id){
+			// Cadastrando
+			$this->form_validation->set_rules('categoria_nome', 'Nome da categoria', 'trim|required|min_length[4]|max_length[45]|callback_valida_nome_categoria');
+			if($this->form_validation->run()){
+				$data = elements(
+					array(
+						'categoria_nome',
+						'categoria_ativa',
+					),
+					$this->input->post()
+				);
 
+				$data['categoria_meta_link'] = url_amigavel($data['categoria_nome']);
+
+				$data = html_escape($data);
+
+				$this->core_model->insert('categorias', $data);
+				redirect('restrita/categorias');
+			}else{
+				$data = array(
+					'titulo' => 'Cadastrar categoria filha',
+					'masters' => $this->core_model->get_all('categorias_pai'),
+				);
+
+				$this->load->view('restrita/layout/header', $data);
+				$this->load->view('restrita/categorias/core');
+				$this->load->view('restrita/layout/footer');
+			}
 		}else{
 			if(!$this->core_model->get_by_id('categorias', array('categoria_id' => $categoria_id))){
 				$this->session->set_flashdata('erro', 'Categoria não encontrada');
@@ -66,6 +92,7 @@ class Categorias extends CI_Controller
 					$data = array(
 						'titulo' => 'Editar categoria filha',
 						'categoria' => $this->core_model->get_by_id('categorias', array('categoria_id' => $categoria_id)),
+						'masters' => $this->core_model->get_all('categorias_pai'),
 					);
 
 					$this->load->view('restrita/layout/header', $data);

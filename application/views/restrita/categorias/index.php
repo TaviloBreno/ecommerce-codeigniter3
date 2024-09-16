@@ -11,7 +11,7 @@
 					<div class="card">
 						<div class="card-header d-block">
 							<h4><?php echo $titulo; ?></h4>
-							<a href="<?php echo base_url('restrita/categoria/core'); ?>" class="btn btn-primary float-right">Cadastrar</a>
+							<a href="<?php echo base_url('restrita/categorias/core'); ?>" class="btn btn-primary float-right">Cadastrar</a>
 						</div>
 						<div class="card-body">
 
