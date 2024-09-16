@@ -41,7 +41,28 @@ class Master extends CI_Controller
 
 		if(!$categoria_pai_id){
 			// Cadastrando
-
+			$this->form_validation->set_rules('categoria_pai_nome', 'Nome da categoria', 'trim|required|min_length[4]|max_length[45]|callback_valida_nome_categoria');
+			if($this->form_validation->run()){
+				$data = elements(
+					array(
+						'categoria_pai_nome',
+						'categoria_pai_meta_link',
+						'categoria_pai_ativa',
+					),
+					$this->input->post()
+				);
+				$data['categoria_pai_meta_link'] = url_amigavel($data['categoria_pai_nome']);
+				$data = html_escape($data);
+				$this->core_model->insert('categorias_pai', $data);
+				redirect('restrita/master');
+			}else{
+				$data = array(
+					'titulo' => 'Cadastrar categoria pai',
+				);
+				$this->load->view('restrita/layout/header', $data);
+				$this->load->view('restrita/master/core');
+				$this->load->view('restrita/layout/footer');
+			}
 		}else{
 			if(!$categoria_pai = $this->core_model->get_by_id('categorias_pai', array('categoria_pai_id' => $categoria_pai_id))){
 				$this->session->set_flashdata('erro', 'Categoria pai não encontrada');
@@ -100,5 +121,16 @@ class Master extends CI_Controller
 				return true;
 			}
 		}
+	}
+
+	public function delete($categoria_pai_id = null)
+	{
+		$categoria_pai_id = (int) $categoria_pai_id;
+		if(!$categoria_pai_id || !$this->core_model->get_by_id('categorias_pai', array('categoria_pai_id' => $categoria_pai_id))){
+			$this->session->set_flashdata('erro', 'Categoria pai não encontrada');
+			redirect('restrita/master');
+		}
+		$this->core_model->delete('categorias_pai', array('categoria_pai_id' => $categoria_pai_id));
+		redirect('restrita/master');
 	}
 }
