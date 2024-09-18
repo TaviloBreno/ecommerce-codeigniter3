@@ -26,21 +26,26 @@ class Core_model extends CI_Model
 		}
 	}
 
-	public function insert($table = null, $data = null, $get_last_id = null)
+	public function insert($table = null, $data = null, $get_last_id = false)
 	{
-		if($table && $this->db->table_exists($table) && is_array($data)){
-			if($get_last_id){
-				$this->session->set_userdata('last_id', $this->db->insert_id());
-			}
-
+		if ($table && $this->db->table_exists($table) && is_array($data)) {
+			// Inserindo os dados na tabela
 			$this->db->insert($table, $data);
 
-			if($this->db->affected_rows() > 0){
+			// Verificando se a inserção foi bem-sucedida
+			if ($this->db->affected_rows() > 0) {
+				// Se necessário, obter o ID do último registro inserido
+				if ($get_last_id) {
+					return $this->db->insert_id();
+				}
+
 				$this->session->set_flashdata('sucesso', 'Dados salvos com sucesso');
-			}else{
+				return true;
+			} else {
 				$this->session->set_flashdata('erro', 'Erro ao salvar dados');
+				return false;
 			}
-		}else{
+		} else {
 			return false;
 		}
 	}
