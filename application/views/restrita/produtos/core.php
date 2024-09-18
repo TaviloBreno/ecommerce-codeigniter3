@@ -43,7 +43,7 @@ $this->load->view('restrita/layout/sidebar');
 							<div class="form-row">
 								<div class="form-group col-md-4">
 									<label>Código do Produto</label>
-									<input type="text" class="form-control" name="produto_codigo" value="<?php echo isset($produto) ? $produto->produto_codigo : set_value('produto_codigo'); ?>" <?php echo isset($produto_id) ? '' : 'readonly'; ?>>
+									<input type="text" class="form-control" name="produto_codigo" value="<?php echo isset($produto) ? $produto->produto_codigo : generateUniqueNumber(); ?>" readonly >
 									<?php echo form_error('produto_codigo', '<div class="text-danger">', '</div>'); ?>
 								</div>
 

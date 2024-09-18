@@ -73,3 +73,22 @@ function formata_data_banco_sem_hora($string) {
 
     return $dia . '/' . $mes_num . '/' . $ano;
 }
+
+function generateUniqueNumber($length = 10, &$generatedNumbers = array())
+{
+	if ($length <= 0) {
+		throw new InvalidArgumentException('O comprimento deve ser um número positivo.');
+	}
+
+	$min = pow(10, $length - 1);
+	$max = pow(10, $length) - 1;
+
+	do {
+		// Gera um número aleatório no intervalo especificado
+		$number = mt_rand($min, $max);
+	} while (in_array($number, $generatedNumbers)); // Verifica se o número já foi gerado
+
+	$generatedNumbers[] = $number; // Armazena o número gerado
+
+	return $number;
+}

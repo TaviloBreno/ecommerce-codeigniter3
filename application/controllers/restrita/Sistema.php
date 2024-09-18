@@ -71,4 +71,46 @@ class Sistema extends CI_Controller
 		$this->load->view('restrita/layout/footer');
 	}
 
+	public function correios()
+	{
+		$this->form_validation->set_rules('config_cep_origem', 'CEP de origem', 'trim|required|exact_length[9]');
+		$this->form_validation->set_rules('config_codigo_pac', 'Código PAC', 'trim|required|exact_length[5]');
+		$this->form_validation->set_rules('config_codigo_sedex', 'Código SEDEX', 'trim|required|exact_length[5]');
+		$this->form_validation->set_rules('config_somar_frete', 'Valor a somar no frete', 'trim|required');
+		$this->form_validation->set_rules('config_valor_declarado', 'Valor declarado', 'trim|required');
+
+		if($this->form_validation->run()){
+			$data = elements(
+				array(
+					'config_cep_origem',
+					'config_codigo_pac',
+					'config_codigo_sedex',
+					'config_somar_frete',
+					'config_valor_declarado',
+				),
+				$this->input->post()
+			);
+
+			$data['config_somar_frete'] = str_replace(',', '', $data['config_somar_frete']);
+			$data['config_valor_declarado'] = str_replace(',', '', $data['config_valor_declarado']);
+
+			$data = html_escape($data);
+
+			$this->core_model->update('config_correios', $data, array('config_id' => 1));
+			redirect('restrita/sistema/correios');
+		}else{
+			$data = array(
+				'titulo' => 'Configurações dos Correios',
+				'scripts' => array(
+					'mask/jquery.mask.min.js',
+					'mask/custom.js',
+				),
+				'correios' => $this->core_model->get_by_id('config_correios', array('config_id' => 1)),
+			);
+
+			$this->load->view('restrita/layout/header', $data);
+			$this->load->view('restrita/sistema/correios');
+			$this->load->view('restrita/layout/footer');
+		}
+	}
 }

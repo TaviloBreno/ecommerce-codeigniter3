@@ -40,6 +40,9 @@
 				<ul class="dropdown-menu">
 					<li><a class="nav-link" href="<?php echo base_url('restrita/sistema'); ?>">Sistema</a></li>
 				</ul>
+				<ul class="dropdown-menu">
+					<li><a class="nav-link" href="<?php echo base_url('restrita/sistema/correios'); ?>">Correios</a></li>
+				</ul>
 			</li>
 
 		</ul>
