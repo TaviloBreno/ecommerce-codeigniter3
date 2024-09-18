@@ -8,7 +8,7 @@ class Sistema extends CI_Controller
 	{
 		parent::__construct();
 
-		if(!$this->ion_auth->logged_in()){
+		if (!$this->ion_auth->logged_in()) {
 			redirect('restrita/login');
 		}
 	}
@@ -30,7 +30,7 @@ class Sistema extends CI_Controller
 		$this->form_validation->set_rules('sistema_email', 'E-mail de contato', 'trim|required|valid_email');
 		$this->form_validation->set_rules('sistema_produtos_destaques', 'Produtos em destaque', 'trim|required|integer');
 
-		if($this->form_validation->run()){
+		if ($this->form_validation->run()) {
 			$data = elements(
 				array(
 					'sistema_razao_social',
@@ -79,7 +79,7 @@ class Sistema extends CI_Controller
 		$this->form_validation->set_rules('config_somar_frete', 'Valor a somar no frete', 'trim|required');
 		$this->form_validation->set_rules('config_valor_declarado', 'Valor declarado', 'trim|required');
 
-		if($this->form_validation->run()){
+		if ($this->form_validation->run()) {
 			$data = elements(
 				array(
 					'config_cep_origem',
@@ -98,7 +98,7 @@ class Sistema extends CI_Controller
 
 			$this->core_model->update('config_correios', $data, array('config_id' => 1));
 			redirect('restrita/sistema/correios');
-		}else{
+		} else {
 			$data = array(
 				'titulo' => 'Configurações dos Correios',
 				'scripts' => array(
@@ -110,6 +110,37 @@ class Sistema extends CI_Controller
 
 			$this->load->view('restrita/layout/header', $data);
 			$this->load->view('restrita/sistema/correios');
+			$this->load->view('restrita/layout/footer');
+		}
+	}
+
+	public function pagseguro()
+	{
+		$this->form_validation->set_rules('config_email', 'E-mail de acesso', 'trim|required|valid_email');
+		$this->form_validation->set_rules('config_token', 'Token', 'trim|required');
+
+		if ($this->form_validation->run()) {
+			$data = elements(
+				array(
+					'config_email',
+					'config_token',
+					'config_ambiente',
+				),
+				$this->input->post()
+			);
+
+			$data = html_escape($data);
+
+			$this->core_model->update('config_pagseguro', $data, array('config_id' => 1));
+			redirect('restrita/sistema/pagseguro');
+		} else {
+			$data = array(
+				'titulo' => 'Configurações do PagSeguro',
+				'pagseguro' => $this->core_model->get_by_id('config_pagseguro', array('config_id' => 1)),
+			);
+
+			$this->load->view('restrita/layout/header', $data);
+			$this->load->view('restrita/sistema/pagseguro');
 			$this->load->view('restrita/layout/footer');
 		}
 	}
