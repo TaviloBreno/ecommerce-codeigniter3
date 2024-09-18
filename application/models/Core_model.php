@@ -16,13 +16,12 @@ class Core_model extends CI_Model
 		}
 	}
 
-	public function get_by_id($table = null, $condicoes = null)
-	{
-		if($table && $this->db->table_exists($table) && is_array($condicoes)){
+	public function get_by_id($tabela = NULL, $condicoes = NULL) {
+		if ($tabela && $this->db->table_exists($tabela) && is_array($condicoes)) {
 			$this->db->where($condicoes);
 			$this->db->limit(1);
-			return $this->db->get($table)->row();
-		}else{
+			return $this->db->get($tabela)->row();
+		} else {
 			return false;
 		}
 	}
