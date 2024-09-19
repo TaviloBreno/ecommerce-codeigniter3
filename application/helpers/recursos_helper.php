@@ -92,3 +92,10 @@ function generateUniqueNumber($length = 10, &$generatedNumbers = array())
 
 	return $number;
 }
+
+function info_header_footer()
+{
+	$ci = &get_instance();
+	$sistema = $ci->core_model->get_by_id('sistema', array('sistema_id' => 1));
+	return $sistema;
+}
