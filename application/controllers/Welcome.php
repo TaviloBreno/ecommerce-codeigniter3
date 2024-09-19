@@ -8,7 +8,8 @@ class Welcome extends CI_Controller {
 
 		$data = array(
 			'titulo' => 'Seja muito bem-vindo(a) a loja vitual ' . $sistema->sistema_nome_fantasia,
-			'sistema' => $sistema
+			'sistema' => $sistema,
+			'grandes_marcas' => grandes_marcas_navbar()
 		);
 
 		$this->load->view('web/layout/header', $data);

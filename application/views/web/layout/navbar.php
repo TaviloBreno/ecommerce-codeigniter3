@@ -19,12 +19,12 @@
 						<ul class="ht-menu">
 							<!-- Begin Setting Area -->
 							<li>
-								<div class="ht-setting-trigger"><span>Setting</span></div>
+								<div class="ht-setting-trigger"><span>Grandes Marcas</span></div>
 								<div class="setting ht-setting">
 									<ul class="ht-setting-list">
-										<li><a href="login-register.html">My Account</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="login-register.html">Sign In</a></li>
+										<?php foreach ($grandes_marcas as $grande_marca): ?>
+										<li><a href="login-register.html"><?php echo $grande_marca->marca_nome; ?></a></li>
+										<?php endforeach; ?>
 									</ul>
 								</div>
 							</li>

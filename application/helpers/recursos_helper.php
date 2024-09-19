@@ -99,3 +99,12 @@ function info_header_footer()
 	$sistema = $ci->core_model->get_by_id('sistema', array('sistema_id' => 1));
 	return $sistema;
 }
+
+function grandes_marcas_navbar()
+{
+	$CI = &get_instance();
+
+	$grandes_marcas = $CI->loja_model->get_grandes_marcas();
+
+	return $grandes_marcas;
+}
